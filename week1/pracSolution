@@ -1,0 +1,68 @@
+1. How many movies are in the database?
+    >select count(*) from Movies;
+    65
+
+2. what are the titles of all movies in the database?
+    >select title from Movies;
+
+3. What is the earliest year that film was made (in this database)?
+    >select min(year) from Movies;
+    >1975
+
+4. How many actors are there (in this database)?
+    >select count(*) from Actors;
+    >2999
+
+5. Are there any actors whose family name is Zeta-Jones?
+    >select givenNames||' '||familyName from Actors where familyName = 'Zeta-Jones';
+    >Catherine Zeta-Jones
+
+6. what genres are there?
+    > select distinct genres from BelongsTo;
+    (distinct remove the duplicates)
+
+7. what movie did Spielberg direct? (title+year)
+
+    #1
+    > select m.title, m.year
+    > from   Movies m
+    /*name entity Movies as m*/
+    >       join Directs s on (s.movie = m.id)
+     /*movie in Directs is foreign key from id*/
+    >       join Directors d on (s.director = d.id)
+    > where d.familyName = 'Spielberg';
+
+    #2
+    > select m.title, m.year
+    > from Movies m, Directs s, Directors d
+    > where d.familyName = 'Spieberg' and s.movie = m.id and s.director = d.id
+
+8. Which actor has acted in all movies (in this database)?
+-- strategy:
+-- for each actor A {
+--	  M1 = all movies that A has acted in
+--    M2 = all movies
+--    check if M1 == M2 (using isEmpty(M2-M1))
+
+    > select a.givenNames||' '||a.familyName
+    > from Actors a
+    /*EXIST is used to check the related query is empty or not*/
+    /*EXCEPT returns distinct rows from the left input query that aren't output by the right input query.*/
+    > where not exists (
+        select id from Movies
+        except
+        select movie as id from AppearsIn where actor = a.id
+    );
+    /*when actor acted in all movies the query would be empty because of EXCEPT*/
+    /*only display the actor when the 'not exists' returns true which means the actor appears in all movies*/
+
+9. Are there any directors in the database who dont direct any movies?
+/*    > select d.givenNames||' '||d.familtName
+    > from Directors d
+    > where not exists(
+        select id from Movies
+        select movie as id from Directs where director=d.id
+    );
+*/
+    #solutions
+    
