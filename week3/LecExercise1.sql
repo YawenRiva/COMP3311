@@ -33,9 +33,9 @@ create table Prescribes (
     doctor      text,
     patient     text,
     drug        text,
-    foreign key (doctor) not null references to Doctor(tfn),
-    foreign key (patient) references to Patient(pid),
-    foreign key (drug) references to Drug(dno),
+    foreign key (doctor) not null references Doctor(tfn),
+    foreign key (patient) references Patient(pid),
+    foreign key (drug) references Drug(dno),
     primary key (Pdate, doctor, patient, drug)
 );
 -- because the prescribe needs to include the date as part of the information
