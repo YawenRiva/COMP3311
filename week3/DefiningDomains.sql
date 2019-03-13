@@ -26,3 +26,25 @@ create domain Pair_integers as
 -- standard UNSW grades(FL,PS,CR,DN,HD)
 create domain UNSW_grades as
     char(2) check (value in ('FL','PS','CR','DN','HD');
+
+                   
+                   
+                   
+                   
+create type UnswGradesType as
+	enum ('FL','PS','CR','DN','HD');
+	-- FL < PS < CR < DN < HD
+
+create table UnswGrades (
+	id      integer,
+	name    char(2),
+	low     float,
+	high    float,
+	primary key (id)
+);
+
+insert into UnswGrades values (1,'FL', 0.0, 49.9);
+insert into UnswGrades values (2,'PS', 50.0, 64.9);
+insert into UnswGrades values (3,'CR', 65.0, 74.9);
+insert into UnswGrades values (4,'DN', 75.0, 84.9);
+insert into UnswGrades values (5,'HD', 85.0, 100.0);
