@@ -37,9 +37,27 @@ begin
     loop
         -- put i into v.val
         v.val := i;
-        -- after put the value into the IntVal, then keep loop v
+        -- after put the value into the IntVal
+        -- check the nect i for v
         return next v;
     end loop;
     return;
+end;
+$$ language plpgsql
+
+
+-- returns integers lo..hi
+create type IntVal as (val integer);
+create and replace function iota(lo integer, hi integer) returns setof IntVal
+as $$
+declare
+    i integer;
+    v IntVal;
+begin
+    for i in _lo.._hi
+    loop
+        v.val := i;
+        return next v;
+    end loop;
 end;
 $$ language plpgsql
