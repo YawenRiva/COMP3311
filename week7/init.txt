@@ -2,3 +2,5 @@ week7 lecture
 
 relational algebra
 examples are in lecture slide
+
+https://www.cse.unsw.edu.au/~cs3311/19s1/lectures/07/notes.html
