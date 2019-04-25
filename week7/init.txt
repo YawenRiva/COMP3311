@@ -1,1 +1,4 @@
 week7 lecture
+
+relational algebra
+examples are in lecture slide
