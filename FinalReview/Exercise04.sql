@@ -153,3 +153,28 @@ where  S.sname='Yosemite Sham' and C.sid=S.sid and
                      from   Catalog C2, Suppliers S2
                      where  S2.sname='Yosemite Sham' and C2.sid=S2.sid
                     )
+
+
+-- QUESTION 9
+CREATE VIEW SeniorEmp (ename, age, alary) AS
+   SELECT E.ename, E.age, E.salary
+   FROM   Emp E
+   WHERE  E.age > 50
+   
+Explain how a database system would process the following query:
+SELECT S.ename
+FROM   SeniorEmp S
+WHERE  S.salary > 100000
+
+SELECT S.ename
+FROM   (SELECT E.ename, E.age, E.salary
+        FROM   Emp E
+        WHERE  E.age > 50) AS S
+WHERE S.salary > 100000
+
+SeniorEmp = proj[ename, age, salary]( sel[age>50](Emp))
+QUERY = proj[ename](sel[salary>100000](SeniorEmp))
+      = proj[ename](sel[salary>100000](proj[ename, age, salary]( sel[age>50](Emp))))
+      = proj[ename](proj[ename,age,salary](sel[salary>100000](sel[age>50](emp))))
+      = proj[ename]( sel[salary>10000 & age>50]( Emp ) ) )
+      = SELECT ename FROM Emp WHERE salary>100000 AND age>50
