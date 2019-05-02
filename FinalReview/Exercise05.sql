@@ -120,3 +120,24 @@ begin
 end;
 $$ language plpgsql;
  
+-- QUESTION 8
+CREATE OR REPLACE FUNCTION hotelsIn(_addr text) returns text
+as $$
+declare
+    bar record;
+    result text :='';
+begin
+    for bar in select * from bars where addr = _addr
+    loop 
+        result:= result || r.name || '\n';
+    end loop;
+    return result;
+end;
+$$ language plpgsql;
+
+-- QUESTION 12
+create or replace function
+	hotelsIn(text) returns setof Bars
+as $$ 
+	select * from Bars where addr = $1;
+$$ language sql;
