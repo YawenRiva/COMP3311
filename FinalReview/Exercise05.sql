@@ -1,3 +1,23 @@
+-- functions returning single atomic value
+CREATE OR REPLACE FUNCTION add(a integer, b integer) return integer
+as $$
+begin
+    return a+b;
+end;
+$$ language plpgsql;
+
+-- function return a single tuple
+CREATE OR REPLACE FUNCTION mkpair(a integer, b integer) return pair
+as $$
+declare
+    p pair;
+begin
+    p.x := a;
+    p.y := b;
+    return p;
+end;
+$$ language plpgsql;
+
 -- QUESTION 1
 -- write a fuction to calculate square of real numbers
 CREATE OR REPALCE function sqr(n integer) returns integer
