@@ -106,11 +106,17 @@ end;
 $$ language plpgsql;
 
 -- QUESTION 4
-CREATE OR REPLACE FUNCTION seq(n integer) returns setof IntValue
+create or replace function seq(n integer) returns setof integer
 as $$
 declare
-
+    i integer;
 begin
+    i:=1;
     while (i<n) loop
-        
-$$ language plpgsql; 
+        return next i; -- append more rows to the result set
+        i := i+1;
+    end loop;
+    return;
+end;
+$$ language plpgsql;
+ 
