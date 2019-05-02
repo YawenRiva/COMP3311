@@ -1,0 +1,24 @@
+[ATTRIBUTES] in table view, it is the column / data item that forms a part of relation, a total number of column is degree
+
+[DOMAIN] a set of allowed value, typically associated with attributes. (DOMAIN = the name of each column in table view)
+
+[RELATION SCHEMA] gives name of the table/relation, names/domain for each attributes, constraints on each attributes
+{FULL RELATION SCHEMA / ABSTRACT RELATION SCHEMA}
+
+[RELATIONAL SCHEMA] a set of RELATION SCHEMA
+
+[TUPLE] tuple = row, the totle number of tuple/row is cardinality
+
+[RELATION] a set of tuples based on the relational schema (same structure as schema, and satisfies all the constraint)
+
+[KEY] a set of attributes
+
+Converts ER model to RELATIONAL schema allows designer to concentrate on the abstract VIEW OF DATA/RELATIONSHIP
+
+ER -> RELATIONAL
+
+[N TO N] RELATIONSHIP contains all the primary key (no relationship table)
+
+[N to 1] N side entities contains all the primary key
+
+[1 to 1] the part with TOTAL PARTICIPATES contains all the primary key (no relationship table)
