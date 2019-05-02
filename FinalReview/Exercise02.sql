@@ -96,3 +96,35 @@ CREATE TABLE favColours (
     colour  text,
     primary key (fan, colour)
 );
+
+
+-- QUESTION 13
+CREATE TABLE truck (
+    truck_no    integer primary key,
+    maxwt       float,
+    maxvol      float,
+);
+CREATE TABLE trip (
+    trip_no     integer primary key,
+    t_date      date,
+    truck       integer references truck(truck_no)
+);
+CREATE TABLE store (
+    name        varchar(50),
+    address     varchar(50) primary key
+);
+CREATE TABLE warehouse (
+    location    varchar(50) primary key
+);
+CREATE TABLE shipment (
+    ship_no     integer primary key,
+    volumn      float,
+    weight      float,
+    trip_no     integer references trip(trip_no),
+    store       varchar(50) references store(address)
+);
+CREATE TABLE source (
+    trip    integer references trip(trip_no),
+    warehouse  varchar(50) referemces warehouse(location),
+    location (trip,warehouse)
+);
