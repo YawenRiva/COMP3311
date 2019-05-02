@@ -1,4 +1,20 @@
--- functions returning single atomic value
+-- PRACTICE
+create or replace function squares(hi integer) returns setof Pair
+as $$
+declare
+    i integer;
+    p pair;
+begin
+    for i in 1..hi loop
+        p.x = i;
+        p.y = i*i;
+        return next p;
+    end loop;
+    return;
+end;
+$$ language plpgsql;
+
+functions returning single atomic value
 CREATE OR REPLACE FUNCTION add(a integer, b integer) return integer
 as $$
 begin
