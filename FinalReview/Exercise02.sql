@@ -128,3 +128,20 @@ CREATE TABLE source (
     warehouse  varchar(50) referemces warehouse(location),
     location (trip,warehouse)
 );
+
+
+-- QUESTION 14
+-- ONE TABLE REQUIRES FOREIGN KEY FROM ANOTHER TABLE WILL ADD LATER CASE
+CREATE TABLE employee (
+    ssn     integer primary key,
+    birthday date,
+    name     varchar,
+    worksfor varchar(50) not null --references department(name)
+);
+CREATE TABLE department (
+    name    varchar(50) primary key,
+    phone   varchar(20),
+    manager integer not null references employee(ssn)
+);
+alter table employee add foreign key (worksfor) references department(name);
+...
