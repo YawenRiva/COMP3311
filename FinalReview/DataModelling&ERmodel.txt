@@ -1,0 +1,17 @@
+1. DATA MODELLING
+  (step1) Data modelling WORKS FROM description of the REQUIREMENT of an application from client.
+  (step2) Find the ENTITIES that are involves in the REQUIREMENT of an application, and clear the RELATIONSHIP and ATTRIBUTES between set of ENTITIES
+  (step3) Make sure that all the REQUIREMENT from step 1 of the application are MET
+  (step4) Make sure the designer is able to build a DATABASE SCHEMA based on the MODEL without any important additional information
+
+2. RELATIONSHIP in ER model
+  - the relationship tells the ASSOCIATATION/RELATIONSHIP between set of ENTITIES
+  - a relationship CAN have ATTRIBUTES
+  - a collection of relationship can form RELATIONSHIP SET
+ 
+3. RELATIONS in relational data model
+  (RELATIONS is like ENTITIES in ER model)
+  - describe the ASSOCIATION between a collection of ATTRIBUTES
+  - can be used to MODEL a CLASS/ENTITY
+  - every relation has a PRIMARY KEY
+  
