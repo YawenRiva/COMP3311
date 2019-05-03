@@ -1,0 +1,35 @@
+BCNF Normalisation
+
+Algorithm:
+	Res={R}
+	while (any schema S in Res is not in BCNF) {
+		choose an FD X->Y on S that violates BCNF
+		Res = (Res-S) U (S-Y) U XY
+	}
+	forall FDs X->Y
+	either (X->Y is trivial) or (X is a super key)
+Example:
+R = ABCDEFGH
+FDs = ABH->C, A->DE, BGH->F, F->ADH, BH->GE
+Key = ?
+S/Res = {ABCDEFGH}
+
+STEP 1:
+	key = BH
+	(look throught the FDS that LHS doesnt contain BH)
+	Fix A->DE
+	XY = ADE
+	S-Y = ABCFGH (Res - RHS(DE))
+	Res = {ADE, ABCFGH}
+
+Res = {ABCFGH}
+FDs = ABH->C, BGH->F, F->AH, BH->G
+
+STEP 2:
+	key = BH
+	Fix F->AH
+	XY = FAH
+	S-Y = BCFG
+	Res = {ADE, FAH, BCFG}
+
+Res = {BCFG}
