@@ -1,0 +1,19 @@
+Find the MINIMAL COVER of functional dependencies
+
+1. ReduceRight: ensure all functional dependencies have one attribute on RHS
+2. ReduceLeft: remove redundant attributes on LHS
+3. RemoveRedundant: eliminate redundant functional dependencies
+
+R = {A,B,C,D,E,G}
+F = {A->BCD, B->CDE, AC->E}
+
+AFTER STEP 1
+A->B, A->C, A->D, B->C, B->D, B->E, AC->E
+
+AFTER STEP 2:
+AC->E because (A->B AND B->E) so A->E
+A->B, A->C, A->D, B->C, B->D, B->E, A->E
+
+AFTER STEP 3:
+(A->B, B->C SO A->C)
+A->B, B->C, B->D, B->E
