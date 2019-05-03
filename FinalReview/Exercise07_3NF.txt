@@ -1,0 +1,29 @@
+3NF Normalization
+
+Algorithm:
+Input: a schema R, a set F of FDs
+Output: a set Res of 3NF schemas
+
+F' = condensed minimal cover for F
+Res = {}
+for each fd X->Y in F' {
+	if (no shcema S in Res contains XY) 
+		Res = Res U XY
+}
+if (no shcema S in Res contains key(R))
+	Res = Res U key(R)
+
+3NF requirement:
+	forall FDs X->Y
+	either (X->Y is trivial) or (X is a super key) or (Y is a single attribute and Y is in the key)
+
+Example:
+R = ABCDEFGH
+F = ABH->C, A->D, C->E, BGH->F, F->AD, E->F, BH->E
+Fc = BH->C, BH->E, E->F, F->A, F->D
+Key = BHG
+
+F' = BH->CE, E->F,F->AD
+
+{BHCE, EF, FAD, BHG}
+KEY(BH, E, F, BHG)
