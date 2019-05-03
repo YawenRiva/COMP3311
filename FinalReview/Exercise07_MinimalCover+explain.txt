@@ -17,3 +17,13 @@ A->B, A->C, A->D, B->C, B->D, B->E, A->E
 AFTER STEP 3:
 (A->B, B->C SO A->C)
 A->B, B->C, B->D, B->E
+
+
+EXPLAIN
+
+Database "geonames" with table1=countries, table2=geonames
+
+1. select id, name, countrycode from geonames;
+   (explain command can ask postgreSQL how does it execute query) 
+   EXPLAIN s select id, name, countrycode from geonames;
+   (query plan will be printed)
