@@ -1,0 +1,14 @@
+QUESTION 12
+(1)
+select ename from employees where payrate > 20;
+res1 = proj[eno,ename](sel[payrate>20](employees))
+
+temp = sel[payrate>20](employees)
+res2 = proj[eno, ename](temp)
+
+
+
+(2)
+select e.ename from employees join departments d on (d.eno=e.eno)
+temp = employees join departments (on eno)
+res  = sel[ename](temp)
