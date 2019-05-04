@@ -1,0 +1,24 @@
+QUESTION 10
+
+a. print out the list of players' name, and the number of goals they got.
+
+b. for 500 players, need to get a player list contains all the id and name
+   first which will require one dbquery() call.
+   and for the 1000 goals, will call 500 times because
+   $rr = dbQuery($db, mkSQL($count,$id));
+   and there are only 500 avaliable players
+   500 + 1 = 501 dbQuery() will be issued.
+c.
+<?
+require(".../db.php");
+$db = dbConnect("dbname=exam");
+
+$player_goal = "select p.id, p.name, count(g.id) from players p
+		left outer join goals g on (g.scoredby = p.id)
+		group by p.id;";
+$res = dbQuery($db, mkSQL($player_goal));
+while ($t = dbNext($res)) {
+	list($id,$name,$count) = $t;
+	printf("%s %d\n", $name, $count);
+}
+?>
