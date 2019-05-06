@@ -137,3 +137,74 @@ begin
   return out; 
 end;
 $$ language plpgsql;
+
+
+
+-- TRIGGER PART 
+-- question 6
+create table Emp(
+empname    text primary key,
+salary     integer,
+last_date  timestamp,
+last_usr   text
+);
+create or replace function emp_stamp() returns trigger
+as $$
+begin
+  -- ensure employees name is given 
+  if new.empname is null then
+    raise exception 'empname cannot be NULL';
+  end if;
+  if new.salary is null then
+    raise exception 'salary cannot be null';
+  end if;
+  if (new.salary < 0) then
+    raise exception 'salary has to be positive value';
+  end if;
+  new.last_date:= now();
+  new.last_user:= user();
+  return new;
+end;
+$$ language plpgsql;
+create trigger emp_stamp
+before insert or update
+on emp for each row
+procedure emp_stanp();
+
+
+--question 7
+create table course (
+  code  char(8) primary key,
+  lic   text,
+  quota  integer,
+  numStudes integer
+);
+create table emrolment(
+  course    char(8) references course(code),
+  sid       integer,
+  mark      integer,
+  primary key (course, sid)
+);
+Create trigger newEnrolment
+Before insert
+on enrolment for each row
+procedure newEnrolment();
+create or replace function newEnrolment() returns trigger
+as $$
+declare
+  _capacity integer; _students integer;
+begin
+  select quota, numStudes into _capacity, _students from course where code=new.course;
+  _students := _students+1;
+  if (_students>_capacity) then
+    raise exception 'this insertion would cause the quota to be exceeded';
+  else
+    update  course
+    set     numStudes=_students
+    where   code = new.course;
+   end if;
+end;
+$$ language plpgsql;
+
+
+
