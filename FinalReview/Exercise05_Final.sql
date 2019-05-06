@@ -113,3 +113,27 @@ begin
   return;
 end;
 $$ language plpgsql;
+
+
+
+/*
+Beers(name:string, manufacturer:string)
+Bars(name:string, address:string, license#:integer)
+Drinkers(name:string, address:string, phone:string)
+Likes(drinker:string, beer:string)
+Sells(bar:string, beer:string, price:real)
+Frequents(drinker:string, bar:string)
+*/
+--question 8
+create or replace function hotelsIn(_addr text) returns text
+as $$
+declare
+  _hotels record; result text :='';
+begin
+  for _hotels in select * from bars where address=_addr
+  loop
+      result := result || r.name || '\n';
+  end loop;
+  return out; 
+end;
+$$ language plpgsql;
